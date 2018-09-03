@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>canvas粒子</title>
+</head>
+<body>
+        <canvas id="_canvas">你的浏览器不支持该元素</canvas>
+        <script>
+                const _canvas  = document.getElementById('_canvas')
+                let ctx = _canvas.getContext('2d'),          // 获取画笔
+                        min = 40000,p_num = 150  //min最小距离 p_num点的个数
+                //设置canvas的宽度和高度  将canvas铺满屏幕
+                let canvas_width = _canvas.width = window.innerWidth || document.documentElement.clientWidth ||  document.body.clientWidth
+                let canvas_height = _canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+                let points = [],_points=[] // points用来存储画面中的粒子信息 _points存放不包含mousePoint信息的点
+                let mousePoint = {
+                        maxWidth: 32000         //鼠标点吸附其他点的范围
+                }             //存储鼠标位置的对象
+                _canvas.style = "position:fixed;top:0;left:0"
+                //实现绘画函数
+                function draw(){
+                        //清屏
+                        ctx.clearRect(0,0,canvas_width,canvas_height)
+
+                        points.forEach((p,index)=>{
+                                //设置point移动的数据
+                                p.startX += p.vX,
+                                p.startY += p.vY
+
+                                if(p.startX >= canvas_width - 2 || p.startX < 0)
+                                        p.vX = -p.vX
+                                if(p.startY >= canvas_height - 2 || p.startY < 0)
+                                        p.vY = -p.vY
+
+                                ctx.fillStyle='#666'
+
+                                ctx.fillRect(p.startX-1,p.startY-1,2,2)
+                                 //两个点之间的距离只要小于min就绘制一条线 距离越长线越细 距离越短 线越粗
+                                //相当于握手问题 两点之间只绘制一条线
+                                for(let i = index+1; i<points.length; i++){
+                                        let dx = points[i].startX - p.startX
+                                        let dy = points[i].startY - p.startY
+                                        let dl = dx*dx + dy*dy,          //两点之间距离的平方
+                                        w = (min - dl)/min
+                                        //鼠标的吸附效果 --- 是靠近鼠标的点的位置 离鼠标点 更近 距离鼠标最大可控范围 要比鼠标的速度大
+                                        dl < points[i].maxWidth && (points[i] === mousePoint && dl >= points[i].maxWidth / 2 && (p.startX += dx*0.02, p.startY += dy*0.02));
+                                        //判断两点距离是否满足划线的条件
+                                        if(dl<min){
+                                                ctx.beginPath()
+                                                ctx.lineWidth = w
+                                                ctx.strokeStyle = `rgba(100,100,100,${w + 0.2})`    
+                                                ctx.moveTo(p.startX,p.startY)
+                                                ctx.lineTo(points[i].startX,points[i].startY)
+                                                ctx.stroke()
+                                        }
+                                }
+                        })
+                       // window.requestAnimationFrame(draw)
+                }
+                //随机产生100个点的坐标 和 相应的 水平垂直的速度
+                for(let i=0; i<p_num; i++){
+                        let startX = Math.random()*canvas_width,
+                            startY = Math.random()*canvas_height        //初始化point坐标
+                        let vX =Math.random()*2 -1,
+                            vY =Math.random()*2 -1                     //初始化point速度
+                        _points[i] = {startX,startY,vX,vY}
+                }
+
+                //添加鼠标事件
+                window.onmousemove = function(e){
+                        e = e || window.event
+                        mousePoint.startX = e.clientX
+                        mousePoint.startY = e.clientY
+                        mousePoint.vX = 0
+                        mousePoint.vY = 0
+                        points = [..._points,mousePoint]
+                }
+                //当鼠标移出去 清楚掉 数组中对应的点
+                document.onmouseout = function(){
+                        points.pop()
+                }
+                setInterval(draw,25)
+        </script>
+</body>
+</html> 
