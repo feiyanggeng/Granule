@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>代码雨</title>
+</head>
+<style>
+        *{
+                padding: 0;
+                margin: 0
+        }
+</style>
+<body>
+        <canvas id="codeRain" style="background: #040404"></canvas>
+        <script>
+                const _canvas = document.querySelector('#codeRain')
+                let ctx = _canvas.getContext('2d')
+                //设置canvas画布充满屏幕
+                let canvas_width = _canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+                let canvas_hieght = _canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+                ctx.font = "25px 黑体"; 
+                let y = 20, words = []
+                for(let i=0; i<100; i++){
+                        createCodeRain()
+                }
+                //产生 代码雨 对象
+                function createCodeRain(startY){
+                        let startX = Math.floor(Math.random()*canvas_width)
+                        startY = startY || Math.floor(Math.random()*500)
+                        let speed = 2+Math.random()*8
+                        let length = Math.ceil(Math.random()*20)+1
+                        let w = [{Y: startY,text:Math.round(Math.random(0,1))}]
+                        for(let j=1; j<length; j++){
+                                let text =Math.round(Math.random(0,1)) 
+                                w.push({
+                                      Y:  w[j-1].Y - 30,
+                                      text
+                                })
+                        }
+                        let word = {
+                                startX,
+                                speed,
+                                w,
+                                length
+                        }
+                        words.push(word)
+                }
+                //进行 效果的绘制
+                function drop(){
+                        ctx.clearRect(0,0,canvas_width,canvas_hieght)
+                        words.forEach((item,index)=>{
+                                item.w.forEach((word,_index)=>{
+                                        word.Y += item.speed
+                                        if(words.length < 200){
+                                                if(_index == item.w.length-1 && word.Y > canvas_hieght*2/3 ) createCodeRain(1)
+                                        }
+                                        if(word.Y >= canvas_hieght+20) word.Y = 0
+                                        ctx.fillStyle = `rgba(0,195,49,${item.w.length/(_index*10)})`;
+                                        ctx.fillText(word.text,item.startX,word.Y);
+                                })
+                        })
+                } 
+                //
+                setInterval(drop,5)
+        </script>
+</body>
+</html>
