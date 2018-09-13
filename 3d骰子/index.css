@@ -1,0 +1,88 @@
+*{
+        padding: 0;
+        margin: 0
+}
+.dice{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 250px;
+        height: 250px;
+        margin-top: -125px;
+        margin-left: -125px;
+        transform-style: preserve-3d;
+        transform: rotateX(-20deg) rotateY(-20deg);
+        animation: rotate linear 3s infinite;
+        transform-origin: 50% 50%
+}
+.dice .warpper{
+        position: absolute;
+}
+.warpper{
+        display: flex;
+        padding: 10px;
+        width: 180px;
+        height: 180px;
+        background-color: #000;
+        border: 1px solid #666;
+        border-radius: 10px;
+        box-shadow:  0 0 10px #666,
+                0px 0px 0 5px #CCC inset
+}
+.dot {
+        width: 45px;
+        height: 45px;
+        background-color: #f00;
+        border-radius: 50%;
+        box-shadow:  0 0 10px rgb(88, 1, 1)
+}
+.warpper1{
+        transform: rotateY(90deg) translateZ(101px);
+        justify-content: center;
+        align-items: center;
+}
+.warpper2{
+        transform: rotateX(90deg) translateZ(101px);
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+}
+.warpper3{
+        transform: rotateX(90deg) translateZ(-101px);
+        justify-content: space-around;
+}
+.warpper3 .dot1 {
+        align-self: center;
+}
+.warpper3 .dot2 {
+        align-self: flex-end;
+}
+.warpper4{
+        transform: rotateY(90deg) translateZ(-101px);
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+}
+.warpper4 .dot {
+        margin: 10px
+}
+.warpper5{
+        transform : translateZ(101px);
+        flex-direction: column;
+        justify-content: space-around;
+}
+.warpper5 .inner {
+        display: flex;
+        justify-content: space-around;
+}
+.warpper6{
+        transform : translateZ(-101px);
+}
+@keyframes rotate{
+        from {
+                transform: rotateX(-20deg) rotateY(-20deg);
+        }
+        to{
+                transform: rotateX(340deg) rotateY(340deg)
+        }
+}
