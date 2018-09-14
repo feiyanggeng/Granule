@@ -1,0 +1,252 @@
+h2{
+        position: relative;
+        background:#F4F9FA;
+	width:50%;
+	color:#F8463F;
+	text-align:center;
+	padding:10px 20px;
+        margin:20px auto 40px;
+        border-radius: 3px
+}
+h2::after,h2::before{
+        position: absolute;
+        content: "";
+        display: block;
+        top: -6px;
+        border: 18px solid #DCF4F4
+}
+h2::before{
+        left: -36px;
+        border-left: 18px solid transparent 
+}
+h2::after{
+        right: -36px;
+        border-right: 18px solid transparent 
+}
+h2 span::before,h2 span::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        z-index: -1;
+        display: block;
+        border: 5px solid #A7CECC;
+}
+h2 span::before{
+        left: 0;
+        border-top-color: transparent;
+        border-right-color: transparent
+}
+h2 span::after{
+        right: 0;
+        border-top-color: transparent;
+        border-left-color: transparent
+}
+.silk-ribbon {
+        position: relative;
+        float: left;
+        width: 48%;
+        height: 188px;
+        margin-top: 20px;
+        background-color: #ccc;
+	color:white;
+}
+.silk-ribbon:nth-child(even) {
+        margin-right: 4%
+}
+.silk-ribbon1 { 
+        position:absolute;
+	top:-6px;
+	right:10px;
+}
+.silk-ribbon1 span{
+        position:relative;
+	display:inline-block;
+	text-align:center;
+	background:#F8463F;
+	font-size:14px;
+	line-height:1;
+	padding:12px 8px 10px;
+	border-top-right-radius:8px;
+	width:90px;
+}
+.silk-ribbon1::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        display: block;
+        border:53px solid transparent;
+        border-top:10px solid #F8463F;
+}
+.silk-ribbon1 span::before,.silk-ribbon1 span::after{
+        position: absolute;
+        display: block;
+        top: 0px;
+        height: 6px;
+}
+.silk-ribbon1 span::before{   
+        left: -4px;
+        content: "";
+        width: 6px;
+        background:#F8463F;
+}
+.silk-ribbon1 span::after{
+        left: -8px;
+        content: "";
+        width: 8px;
+        border-radius: 4px 4px 0 0 ;
+        background:#C02031;
+}
+.silk-ribbon2 {
+        position: absolute;
+        top: -6px;
+        left: 25px;
+        padding: 5px 0;
+        width: 60px;
+        text-align: center;
+        background:#F47530;
+        border-radius: 4px 0 0 0 ;
+}
+.silk-ribbon2::before,.silk-ribbon2::after{
+        position: absolute;
+        display: block;
+        content: "";
+}
+.silk-ribbon2::before{
+        top: 0;
+        right: -6px;
+        border: 3px solid #8D5A20;
+        border-top-color: transparent;
+        border-right-color: transparent
+}
+.silk-ribbon2::after{
+        bottom: -30px;       
+        border-left: 30px solid #F47530;
+        border-right: 30px solid #F47530;
+        border-bottom: 30px solid transparent;
+}
+.silk-ribbon3{
+        position: absolute;
+        top: 20px;
+        left: -10px;
+        width:150px;
+	height:50px;
+        line-height:50px;
+        padding-left: 15px;
+        border-radius: 0 0 0 4px;
+        background: #59324c;
+}
+.silk-ribbon3::after{
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        right: -15px;
+        border-top:  25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-left: 15px solid #59324c
+}
+.silk-ribbon3 span::before{
+        position: absolute;
+        top: -10px;
+        left: 0;
+        content: "";
+        border: 5px solid #000;
+        border-top-color: transparent;
+        border-left-color: transparent 
+}
+.silk-ribbon4{
+        position: absolute;
+        left: -10px;
+        top: 20px;
+        padding: 0 10px 0 20px;
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        background: #00b3ed;
+        border-radius: 6px 0 0 0;
+        box-shadow: 1px 2px 2px 0 #888
+}
+.silk-ribbon4::before{
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        content: "";
+        border-radius: 0 0 0 6px;
+        border: 5px solid #00b3ed
+}
+.silk-ribbon4 span::before{
+        position: absolute;
+        bottom: -6px;
+        left: 4px;
+        content: "";
+        border-radius: 3px 0 0 3px;
+        border: 3px solid #666
+}
+.silk-ribbon5{
+        position: absolute;
+        top: 20px;
+        left: -10px;
+        right: -10px;
+        display: block;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        background: #edba19
+}
+.silk-ribbon5::before,.silk-ribbon5::after{
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        border: 5px solid #cdbd11;
+        border-bottom-color: transparent
+}
+.silk-ribbon5::before{
+        left: 0;
+        border-left-color: transparent;
+}
+.silk-ribbon5::after{
+        right: 0;
+        border-right-color: transparent
+}
+.slik6-warper{
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        top: -10px;
+        right: -10px;
+}
+.silk-ribbon6{
+        position: absolute;
+        top: 25px;
+        right: -50px;
+        display: block;
+        width: 200px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        border: 1px dashed #fff;
+        transform: rotate(45deg);
+        background: #57dd43;
+        box-shadow: 0 0 0 4px #57dd43
+}
+.slik6-warper::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 132px;
+        z-index: -1;
+        display: block;
+        border: 10px solid #4d6530;
+        border-radius: 10px 10px 0 4px;
+}
+.slik6-warper::after{
+        content: "";
+        position: absolute;
+        top: 128px;
+        right: 0;
+        z-index: -1;
+        display: block;
+        border: 10px solid #4d6530;
+        border-radius: 0 0 10px 10px;
+}
