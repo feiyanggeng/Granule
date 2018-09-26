@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>css幻灯片</title>
+</head>
+<style> 
+       * {margin: 0;padding: 0;}
+       ul, li {list-style-type: none}
+       .swiper {position: relative;width: 500px;height: 320px;margin: 120px auto;overflow: hidden;}
+       .swiper ul {position: absolute;animation: loops 10s ease infinite;display: flex;width: 500px;height: 320px}
+       .swiper ul li img{width: 500px;height: 320px;}    
+       @keyframes loops {
+        0% {
+                       left: 0
+               }
+               5% {
+                       left: 0
+               }
+               25% {
+                       left: -500px
+               }
+               30% {
+                       left: -500px
+               }
+               55% {
+                       left: -1000px
+               }
+               60% {
+                       left: -1000px
+               }
+               85% {
+                       left: -1500px
+               }
+               90% {
+                       left: -1500px
+               }
+               100% {
+                       left: 0
+               }
+       }  
+       @-webkit-keyframes loops {
+                0% {
+                       left: 0
+               }
+               5% {
+                       left: 0
+               }
+               25% {
+                       left: -500px
+               }
+               30% {
+                       left: -500px
+               }
+               55% {
+                       left: -1000px
+               }
+               60% {
+                       left: -1000px
+               }
+               85% {
+                       left: -1500px
+               }
+               90% {
+                       left: -1500px
+               }
+               100% {
+                       left: 0
+               }
+       }
+</style>
+<body>
+        <div class="swiper">
+                <ul>
+                        <li><img src="img/saber-d.jpg" alt="1"></li>
+                        <li><img src="img/saber.png" alt="2"></li>
+                        <li><img src="img/saber1.jpeg" alt="3"></li>
+                        <li><img src="img/saber2.jpg" alt="4"></li>
+                </ul>
+        </div>
+</body>
+</html>
