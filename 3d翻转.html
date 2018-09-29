@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+<style>
+        * {
+                padding: 0;
+                margin: 0;
+        }
+
+        body {
+                background: #0d34b2
+        }
+
+        .container {
+                margin: 0 auto;
+                margin-top: 40px;
+                width: 920px;
+        }
+
+        .container::after {
+                content: '';
+                display: block;
+                clear: both;
+                width: 0;
+                height: 0;
+        }
+
+        .wrap {
+                position: relative;
+                float: left;
+                margin-left: 10px;
+                width: 220px;
+                height: 300px;
+                text-align: center;
+                perspective: 400;
+                -webkit-perspective:400
+        }
+
+        .img,
+        .text {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                color: #fff;
+                font-size: 24px;
+                font-weight: 500;
+                backface-visibility: hidden;
+                transition: transform linear 1s
+        }
+
+        .text {
+                background: linear-gradient(180deg, #fdbb5a, #db5726);
+                line-height: 2;
+                transform: rotateY(180deg)
+        }
+
+        .wrap1 .img {
+                background: url('./images/img1.jpg')
+        }
+
+        .wrap2 .img {
+                background: url('./images/img2.jpg')
+        }
+
+        .wrap3 .img {
+                background: url('./images/img3.jpg')
+        }
+
+        .wrap4 .img {
+                background: url('./images/img4.jpg')
+        }
+
+        .wrap1:hover .img {
+                transform: rotateY(180deg)
+        }
+
+        .wrap1:hover .text {
+                transform: rotateY(360deg)
+        }
+
+        .wrap2:hover .img {
+                transform: rotateY(180deg)
+        }
+
+        .wrap2:hover .text {
+                transform: rotateY(360deg)
+        }
+
+        .wrap3:hover .img {
+                transform: rotateY(180deg)
+        }
+
+        .wrap3:hover .text {
+                transform: rotateY(360deg)
+        }
+
+        .wrap4:hover .img {
+                transform: rotateY(180deg)
+        }
+
+        .wrap4:hover .text {
+                transform: rotateY(360deg)
+        }
+</style>
+
+<body>
+        <div class="container">
+                <div class="wrap wrap1">
+                        <div class="img"></div>
+                        <div class="text">这是老大</div>
+                </div>
+                <div class="wrap wrap2">
+                        <div class="img"></div>
+                        <div class="text">这是大姐頭</div>
+                </div>
+                <div class="wrap wrap3">
+                        <div class="img"></div>
+                        <div class="text">这是小清！</div>
+                </div>
+                <div class="wrap wrap4">
+                        <div class="img"></div>
+                        <div class="text">这是學霸</div>
+                </div>
+        </div>
+
+</body>
+
+</html>
