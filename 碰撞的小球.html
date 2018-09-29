@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+</head>
+<body>
+        <div id="warpper" style="width: 500px;height: 500px;background-color: #ccc;position: relative;overflow: hidden;">
+                <div id="ball" style="width: 10px;height: 10px;background-color: red;position: absolute;border-radius: 50%"></div>
+        </div>
+        <script>
+                function fun(v){
+                        //设置横纵方向上的速度
+                        let vx = Math.random()*v
+                        let vy = Math.sqrt(v*v - vx*vx);
+                        //设置小球的起始位置
+                        let startX = Math.random()*490 
+                        let startY = Math.random()*490     
+                        const ball = document.getElementById('ball')
+                        ball.style.left = startX + 'px'
+                        ball.style.top = startY + 'px'
+                        //设置小球运动动画
+                        function animation(){
+                                if(startX >= 490 || startX < 0)
+                                        vx = -vx
+                                startX += vx
+                                if(startY >= 490 || startY < 0)
+                                        vy = -vy
+                                startY += vy
+                                ball.style.left = startX + 'px'
+                                ball.style.top = startY + 'px'
+                                window.requestAnimationFrame(animation)
+                        }
+                        window.requestAnimationFrame(animation)
+                }
+                fun(5)
+        </script>
+</body>
+</html>
