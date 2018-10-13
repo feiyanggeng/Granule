@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="./style/iconfont.css">
+        <title>富文本编辑器</title>
+        <style>
+                *{margin: 0;padding: 0;}
+                .edit-wrap {margin: 20px;border-radius: 6px; border: 2px solid #ccc}
+                .tool {padding: 10px; border-bottom: 2px solid #ccc}
+                .edit-wrap .tool button{margin:0 5px;outline: none;width: 25px;height: 25px; line-height: 25px; background: #fff; font-size: 18px;cursor: pointer;border: 1px solid #f1f3f5}
+                .edit-wrap .editable {padding: 10px;min-height: 100px}
+                .edit-wrap .tool .foreColor{margin:0 5px;display: inline-block; width: 25px;height: 25px; line-height: 25px; text-align: center; background: #fff; font-size: 18px;cursor: pointer;border: 1px solid #f1f3f5}
+        </style>
+</head>
+<body>
+        <div class="edit-wrap">
+                <dir class="tool">
+                        <label for="fontColor">
+                                <input id="fontColor" style="display: none;" type="color" onchange="changeColor()">
+                                <div id="setcolor" class="foreColor iconfont icon-zitiyanse"></div>
+                        </label>
+                        <button class="iconfont icon-fuwenben_beijingyanse"></button>
+                        <button id="blod" class="iconfont icon-fuwenben_jiacu"></button>
+                        <button id="italic" class="iconfont icon-fuwenben_xieti"></button>
+                </dir>
+                <div class="editable" id="richedit" contenteditable>
+                        测试内容
+                </div> 
+        </div>
+<script type="text/javascript"> 
+
+        let blod = document.getElementById('blod')
+        // var h1button = document.getElementById('h1')
+        let italic = document.getElementById('italic')
+        let setcolor = document.getElementById('setcolor')
+        // var getText = document.getElementById('getText')
+        let richedit = document.getElementById("richedit"); 
+        let color = document.querySelector('#fontColor')
+        richedit.contentEditable = "true"; 
+
+        function changeColor() {
+                setcolor.style.color = color.value
+                document.execCommand("foreColor", false, color.value);
+                // let selection = document.getSelection()
+                // selection.removeAllRanges()
+        }
+
+        blod.onclick = function () {
+                //转换粗体文本
+                document.execCommand("bold", false, null); 
+        }
+
+        // h1.onclick = function () {
+        //         //格式化为 1 级标题
+        //         document.execCommand("formatblock", false, "<h1>"); 
+        // }
+        italic.onclick = function () {
+                        //转换斜体文本
+                document.execCommand("italic", false, null);
+        }
+        // getText.onclick = function () {
+        //         console.log(div.innerHTML)
+        //         console.log(div.innerText)
+        // }
+        // size.onclick = function () {
+        //         document.execCommand("fontSize", false, "18px");
+        //         let selection = document.getSelection()
+        //         selection.removeAllRanges()
+        // }
+        
+        // //创建指向 www.wrox.com 的链接
+        // document.execCommand("createlink", false, 
+        // "http://www.wrox.com"); 
+                
+</script>       
+</body>
+</html>
