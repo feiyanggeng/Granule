@@ -4,9 +4,55 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="stylesheet" href="./style/iconfont.css">
         <title>Document</title>
+        <style> 
+                .wrap{
+                        font-size: 0
+                }
+                .icon {
+                        font-size: 18px
+                }
+                .title_wrap {
+                        display: inline-block;
+                        font-size: 16px;
+                        height: 20px;
+                        line-height: 20px;
+                        margin-left: 5px;
+                        vertical-align: middle;
+                        overflow: hidden;
+                        white-space: nowrap
+                }
+                .content {
+                        color: #348cd8;
+                        display:inline-block;
+                        animation: roll 4s linear infinite;
+                }
+                @keyframes roll {
+                        to { transform: translateX(-50%); }
+                }
+        </style>
 </head>
 <body>
-        <div></div>
+        <div class="wrap">
+                <i class='icon iconfont icon-iconfontbiaozhunmoban01'></i> 
+                <div class="title_wrap">
+                        <span id="content" class="content">千机变千机变</span>
+                </div>
+        </div>
 </body>
+<script>
+        window.onload = () => {
+                let titleWrap = document.querySelector('.title_wrap')
+                let content = document.querySelector('#content')
+
+                let titleWidth = content.offsetWidth
+
+                console.log(titleWidth)
+
+                titleWrap.style.width = (titleWidth / 2) + 'px'
+
+        }
+</script>
 </html>
