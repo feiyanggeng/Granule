@@ -215,13 +215,13 @@
                let totalTime = document.querySelector('#total_time')
                let progress = document.querySelector('#progress')
                let dot = document.querySelector('#dot')
-
+                
                 music.setAttribute('src', musics[state.cur].src)
                 content.innerText = musics[state.cur].name + musics[state.cur].name
                 singer.innerText = musics[state.cur].singer
                 let titleWidth = content.offsetWidth
                 titleWrap.style.width = (titleWidth / 2) + 'px'
-
+                
                 // 暂停开始
                 start.addEventListener('click', function() {
                         if(!state.play) {
@@ -234,7 +234,7 @@
                                 music.pause()
                         }
                 })
-
+                
                 //上一首下一首
                 pre.addEventListener('click', () => {changeSong(-1)})
                 next.addEventListener('click',() => {changeSong(1)})
@@ -264,21 +264,21 @@
                         let pro = 300 * music.currentTime / music.duration
                         progress.style.width = pro + 'px'
                         dot.style.left = (pro - 2) + 'px'
-
+                        if(music.currentTime == music.duration) {
+                                state.cur++
+                                changeSong(1)
+                        }
                 }, 500)
-
+                
                 // 时间格式化
                 function formatTime(time) {
-                        let minute =Math.round(time / 60)
+                        let minute =Math.floor(time / 60)
                         minute = minute > 9 ? '' + minute : '0' + minute
-                        let second = Math.round(time % 60)
+                        let second = Math.floor(time % 60)
                         second = second > 9 ? '' + second : '0' + second
                         return minute + ':' + second
                 }
-
         }
         
-        
-
 </script>
 </html>
