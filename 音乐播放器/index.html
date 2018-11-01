@@ -9,50 +9,276 @@
         <title>Document</title>
         <style> 
                 .wrap{
-                        font-size: 0
+                        font-size: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        box-sizing: border-box;
+                        height: 50px;
+                        border: 1px solid #f2f2f2;
+                        border-radius: 5px;
+                        overflow: hidden;
                 }
                 .icon {
-                        font-size: 18px
+                        display: inline-block;
+                        box-sizing: border-box;
+                        font-size: 35px;
+                        color: #f00;
+                        vertical-align: top;
+                        height: 50px;
+                        padding: 10px;
+                        line-height: 30px;
+                        background: #eee
+                }
+                .content_wrap {
+                        display: inline-block;
+                        font-size: 16px;
+                        height: 100%;
+                        margin-left: 10px
                 }
                 .title_wrap {
                         display: inline-block;
-                        font-size: 16px;
-                        height: 20px;
-                        line-height: 20px;
+                        font-size: 14px;
+                        height: 16px;
+                        line-height: 16px;
                         margin-left: 5px;
                         vertical-align: middle;
                         overflow: hidden;
                         white-space: nowrap
                 }
                 .content {
-                        color: #348cd8;
+                        color: #666;
                         display:inline-block;
-                        animation: roll 4s linear infinite;
+                        border-radius: 6px;
+                        letter-spacing: 2px;
+                        overflow: hidden;
+                        animation: roll 5s linear infinite 1s;
+                }
+                .singer {
+                        color: #ccc;
+                        font-size: 12px
+                }
+                .controls {
+                        display: inline-block;
+                        vertical-align: top;
+                        height: 50px;
+                        line-height: 50px;
+                        font-size: 0;
+                }
+                .controls .pre, .controls .next, .controls .start {
+                        display: inline-block;
+                        margin: 10px;
+                        background: rgb(223, 59, 59);
+                        color: #fff;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 30px;
+                        width: 30px;
+                        height: 30px;
+                        font-size: 18px 
+                }
+                .controls .pre:active, .controls .next:active, .controls .start:active {
+                        font-size: 16px;
+                        background: rgb(240, 15, 15)
+                }
+                .progress_warp {
+                        height: 26px;
+                        width: 400px;
+                        box-sizing: border-box;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 0 5px;
+                }
+                .progress_warp .progress {
+                        position: relative;
+                        width: 300px;
+                        height: 3px;
+                        background: #ccc;
+                        border-radius: 5px;
+                }
+                .content_wrap .progress .active_progress {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        border-radius: 5px;
+                        height: 3px;
+                        width: 0px;
+                        background: #f00
+                }
+                .progress_warp .progress .dot {
+                        position: absolute;
+                        top: -2px;
+                        left: -2px;
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 3px;
+                        background: rgb(255, 1, 1);
+                        animation: bling 1s linear infinite;
+                }
+                .progress_warp .time{
+                        font-size: 12px;
+                        color: #666
                 }
                 @keyframes roll {
-                        to { transform: translateX(-50%); }
+                        20% {transform: translateX(0);}
+                        100% { transform: translateX(-50%); }
+                }
+                @keyframes bling {
+                        0% {
+                                box-shadow: 0 0 5px 0 #f00
+                        }
+                        100% {
+                                box-shadow: 0 0 15px 0 #f00
+                        } 
                 }
         </style>
 </head>
 <body>
         <div class="wrap">
-                <i class='icon iconfont icon-iconfontbiaozhunmoban01'></i> 
-                <div class="title_wrap">
-                        <span id="content" class="content">千机变千机变</span>
+                <i class="icon iconfont icon-iconfontbiaozhunmoban01"></i>
+                <div class="controls">
+                        <i id="pre" class="pre iconfont icon-shangyishou"></i>
+                        <i id="start" class="start iconfont icon-kaishi"></i>
+                        <i id="next" class="next iconfont icon-next"></i>
                 </div>
+                <div class="content_wrap">
+                        <div>
+                                <div class="title_wrap">
+                                        <span id="content" class="content"></span>
+                                </div>&nbsp;&nbsp;
+                                <span id="singer" class="singer"></span>
+                        </div>
+                        <div class="progress_warp">
+                                <div class="progress">
+                                        <div id="progress" class="active_progress"></div>
+                                        <div id="dot" class="dot"></div>
+                                </div>
+                                <div class="time">
+                                        <span id="current_time" class="current_time">00:00</span>
+                                        /
+                                        <span id="total_time" class="total_time">00:00</span>
+                                </div>
+                        </div>
+                </div> 
         </div>
+        <audio id="music"></audio>
 </body>
 <script>
+        var musics = [
+                {
+                        name: '九张机',
+                        src: './music/music1.mp3',
+                        singer: '叶清玄'
+                },{
+                        name: '拆东墙',
+                        src: './music/music2.mp3',
+                        singer: '许嵩'
+                },{
+                        name: '雅俗共赏',
+                        src: './music/music3.mp3',
+                        singer: '许嵩'
+                },{
+                        name: '素颜',
+                        src: './music/music4.mp3',
+                        singer: '许嵩-何曼婷'
+                },{
+                        name: '富士山下',
+                        src: './music/music5.mp3',
+                        singer: '陈奕迅'
+                },{
+                        name: '最冷一天',
+                        src: './music/music6.mp3',
+                        singer: '陈奕迅'
+                },{  
+                        name: '走马',
+                        src: './music/music7.mp3',
+                        singer: '陈粒'
+                }
+                ]
+        let state = {
+                play : false,
+                cur: 0,
+                timer: null
+        }
         window.onload = () => {
                 let titleWrap = document.querySelector('.title_wrap')
                 let content = document.querySelector('#content')
+                let music = document.querySelector('#music')
+                let singer = document.querySelector('#singer')
 
+               let start = document.querySelector('#start')
+               let pre = document.querySelector('#pre')
+               let next = document.querySelector('#next')
+               let currentTime = document.querySelector('#current_time')
+               let totalTime = document.querySelector('#total_time')
+               let progress = document.querySelector('#progress')
+               let dot = document.querySelector('#dot')
+
+                music.setAttribute('src', musics[state.cur].src)
+                content.innerText = musics[state.cur].name + musics[state.cur].name
+                singer.innerText = musics[state.cur].singer
                 let titleWidth = content.offsetWidth
-
-                console.log(titleWidth)
-
                 titleWrap.style.width = (titleWidth / 2) + 'px'
 
+                // 暂停开始
+                start.addEventListener('click', function() {
+                        if(!state.play) {
+                                state.play = true
+                                start.className = "start iconfont icon-zanting"
+                                music.play()
+                        } else {
+                                state.play = false
+                                start.className = "start iconfont icon-kaishi"
+                                music.pause()
+                        }
+                })
+
+                //上一首下一首
+                pre.addEventListener('click', () => {changeSong(-1)})
+                next.addEventListener('click',() => {changeSong(1)})
+                function changeSong(type) {
+                        state.cur += type
+                        if(state.cur<0) {
+                                state.cur = musics.length - 1
+                        } else if (state.cur > musics.length - 1) {
+                                state.cur = 0
+                        }
+                        music.setAttribute('src', musics[state.cur].src)
+                        content.innerText = musics[state.cur].name + musics[state.cur].name
+                        singer.innerText = musics[state.cur].singer
+                        let titleWidth = content.offsetWidth
+                        titleWrap.style.width = (titleWidth / 2) + 'px'
+                        state.play = true
+                        start.className = "start iconfont icon-zanting"
+                        music.play()
+                }
+                
+                // 进度条
+                state.timer = setInterval(() => {
+                        let duration = formatTime(music.duration)
+                        let curTime = formatTime(music.currentTime)
+                        totalTime.innerText = duration
+                        currentTime.innerText = curTime
+                        let pro = 300 * music.currentTime / music.duration
+                        progress.style.width = pro + 'px'
+                        dot.style.left = (pro - 2) + 'px'
+
+                }, 500)
+
+                // 时间格式化
+                function formatTime(time) {
+                        let minute =Math.round(time / 60)
+                        minute = minute > 9 ? '' + minute : '0' + minute
+                        let second = Math.round(time % 60)
+                        second = second > 9 ? '' + second : '0' + second
+                        return minute + ':' + second
+                }
+
         }
+        
+        
+
 </script>
 </html>
