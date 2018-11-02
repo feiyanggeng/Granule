@@ -23,6 +23,7 @@
                 transform: translate(-50%, -50%);
                 box-sizing: border-box;
                 height: 50px;
+                width: 775px;
                 border: 1px solid #f2f2f2;
                 border-radius: 5px;
         }
@@ -99,6 +100,7 @@
                 padding: 0 5px;
         }
         .progress_warp .progress {
+                cursor: pointer;
                 position: relative;
                 width: 300px;
                 height: 3px;
@@ -106,6 +108,7 @@
                 border-radius: 5px;
         }
         .content_wrap .progress .active_progress {
+                cursor: pointer;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -279,7 +282,7 @@
                                 <span id="singer" class="singer"></span>
                         </div>
                         <div class="progress_warp">
-                                <div class="progress">
+                                <div id="baseProgress" class="progress">
                                         <div id="progress" class="active_progress"></div>
                                         <div id="dot" class="dot"></div>
                                 </div>
@@ -367,7 +370,7 @@
                 let singer = $('#singer')
 
                 let lis = Array.from(document.querySelectorAll('li'))
-               let start = $('#start'),
+                let start = $('#start'),
                 pre = $('#pre'),
                 next = $('#next'),
                 currentTime = $('#current_time'),
@@ -375,8 +378,9 @@
                 progress = $('#progress'), 
                 dot = $('#dot'), 
                 loop = $('#loop'),
-                mute = $('#mute')
-                
+                mute = $('#mute'),
+                baseProgress = $('#baseProgress')
+
                 music.setAttribute('src', musics[state.cur].src)
                 content.innerText = musics[state.cur].name + musics[state.cur].name
                 singer.innerText = musics[state.cur].singer
@@ -398,6 +402,7 @@
                 //上一首下一首
                 pre.addEventListener('click', () => {changeSong(-1)})
                 next.addEventListener('click',() => {changeSong(1)})
+                // 上下切歌
                 function changeSong(type) {
                         state.cur += type
                         if(state.cur<0) {
@@ -405,16 +410,8 @@
                         } else if (state.cur > musics.length - 1) {
                                 state.cur = 0
                         }
-                        music.setAttribute('src', musics[state.cur].src)
-                        content.innerText = musics[state.cur].name + musics[state.cur].name
-                        singer.innerText = musics[state.cur].singer
-                        let titleWidth = content.offsetWidth
-                        titleWrap.style.width = (titleWidth / 2) + 'px'
-                        state.play = true
-                        start.className = "start iconfont icon-zanting"
-                        music.play()
+                        setMusic(state.cur)
                 }
-                
                 // 进度条
                 state.timer = setInterval(() => {
                         let duration = formatTime(music.duration)
@@ -444,7 +441,14 @@
                                         break;
                         }
                 }, 500)
-                
+                // 进度条点击调节进度
+                baseProgress.addEventListener('click', function(e){
+                       let pro = e.offsetX
+                       let currentTime = music.duration * pro / 300
+                       music.currentTime = currentTime
+                       progress.style.width = pro + 'px'
+                        dot.style.left = (pro - 2) + 'px'
+                })
                 // 时间格式化
                 function formatTime(time) {
                         let minute =Math.floor(time / 60)
@@ -474,20 +478,26 @@
                         }
                 }
                 checkModel()
-                
+                // 列表切歌
                 lis.forEach((item, index) => {
                         item.onclick = function() {
-                                music.setAttribute('src', musics[index].src)
-                                content.innerText = musics[index].name + musics[index].name
-                                singer.innerText = musics[index].singer
-                                let titleWidth = content.offsetWidth
-                                titleWrap.style.width = (titleWidth / 2) + 'px'
-                                state.play = true
-                                start.className = "start iconfont icon-zanting"
-                                music.play() 
+                                if (state.cur != index) {
+                                        setMusic(index)
+                                        state.cur = index
+                                }
                         }
                 })
-                
+                // 设置播放音乐
+                function setMusic (index) {
+                        music.setAttribute('src', musics[index].src)
+                        content.innerText = musics[index].name + musics[index].name
+                        singer.innerText = musics[index].singer
+                        let titleWidth = content.offsetWidth
+                        titleWrap.style.width = (titleWidth / 2) + 'px'
+                        state.play = true
+                        start.className = "start iconfont icon-zanting"
+                        music.play() 
+                }
                 // 选择器
                 function $(id) {
                         return document.querySelector(id)
