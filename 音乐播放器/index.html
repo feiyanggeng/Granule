@@ -8,131 +8,259 @@
         <link rel="stylesheet" href="./style/iconfont.css">
         <title>Document</title>
         <style> 
-                .wrap{
-                        font-size: 0;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        box-sizing: border-box;
-                        height: 50px;
-                        border: 1px solid #f2f2f2;
-                        border-radius: 5px;
-                        overflow: hidden;
+        *{
+                margin: 0;
+                padding: 0;
+        }
+        ul ,li {
+                list-style: none;
+        }
+        .wrap{
+                font-size: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                box-sizing: border-box;
+                height: 50px;
+                border: 1px solid #f2f2f2;
+                border-radius: 5px;
+        }
+        .icon {
+                display: inline-block;
+                box-sizing: border-box;
+                font-size: 35px;
+                color: #f00;
+                vertical-align: top;
+                height: 50px;
+                padding: 10px;
+                line-height: 30px;
+                background: #eee
+        }
+        .content_wrap {
+                display: inline-block;
+                vertical-align: top;
+                font-size: 16px;
+                height: 100%;
+                margin-left: 10px
+        }
+        .title_wrap {
+                display: inline-block;
+                font-size: 14px;
+                height: 16px;
+                line-height: 16px;
+                margin-left: 5px;
+                vertical-align: middle;
+                overflow: hidden;
+                white-space: nowrap
+        }
+        .content {
+                color: #666;
+                display:inline-block;
+                border-radius: 6px;
+                letter-spacing: 2px;
+                overflow: hidden;
+                animation: roll 5s linear infinite 1s;
+        }
+        .singer {
+                color: #ccc;
+                font-size: 12px
+        }
+        .controls {
+                display: inline-block;
+                vertical-align: top;
+                height: 50px;
+                line-height: 50px;
+                font-size: 0;
+        }
+        .controls .pre, .controls .next, .controls .start {
+                display: inline-block;
+                margin: 10px;
+                background: rgb(223, 59, 59);
+                color: #fff;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 30px;
+                width: 30px;
+                height: 30px;
+                font-size: 18px 
+        }
+        .controls .pre:active, .controls .next:active, .controls .start:active {
+                font-size: 16px;
+                background: rgb(240, 15, 15)
+        }
+        .progress_warp {
+                height: 26px;
+                width: 400px;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 5px;
+        }
+        .progress_warp .progress {
+                position: relative;
+                width: 300px;
+                height: 3px;
+                background: #ccc;
+                border-radius: 5px;
+        }
+        .content_wrap .progress .active_progress {
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 5px;
+                height: 3px;
+                width: 0px;
+                background: #f00
+        }
+        .progress_warp .progress .dot {
+                position: absolute;
+                cursor: pointer;
+                top: -2px;
+                left: -2px;
+                width: 6px;
+                height: 6px;
+                border-radius: 3px;
+                background: rgb(255, 1, 1);
+                animation: bling 1s linear infinite;
+        }
+        .progress_warp .time{
+                font-size: 12px;
+                color: #666
+        }
+        .tool_wrap {
+                display: inline-block;
+                vertical-align: top;
+                height: 50px;
+                line-height: 50px;
+        }
+        .tool_wrap .tool_item {
+                cursor: pointer;
+                margin:0 15px;
+                font-size: 22px;
+                color: #666
+        }
+        .tool_wrap #mute, .tool_wrap #list {
+                position: relative;
+                display: inline-block;
+                height: 45px;
+        }
+        .tool_wrap #mute .volume, .tool_wrap #mute .triangle, .tool_wrap #list .triangle, .tool_wrap #list .music_menu  {
+                display: none;
+                opacity: 0;
+                transition: opacity 2s linear
+        }
+        .tool_wrap #mute .volume,.tool_wrap #list .music_menu {
+                position: absolute;
+                z-index: 10;
+                box-sizing: border-box;
+                padding: 0 5px;
+                width: 200px;
+                height: 45px;
+                line-height: 45px;
+                border: 1px solid #ccc;
+                background: #fff;
+                top: -50px;
+                right: -80px;
+        }
+        .tool_wrap #list .music_menu {
+                width: 400px;
+                height: 300px;
+                top: -305px;
+                padding: 0;
+                font-size: 16px
+        }
+        .tool_wrap #list .music_menu p {
+                border-bottom: 1px solid #ddd
+        }
+        .tool_wrap #list .music_menu ul {
+                overflow-y: scroll;
+                overflow-x: none;
+                height: 250px;
+        }
+        .tool_wrap #list .music_menu ul li {
+                font-size: 14px;
+                padding: 0 10px;
+                border-top: 1px solid #ccc
+        }
+        .tool_wrap #list .music_menu ul li:hover {
+                background: #eee
+        }
+        ul::-webkit-scrollbar {
+                width: 4px;
+        }
+        ul::-webkit-scrollbar-thumb {
+                background: #818181;
+                border-radius: 6px;
+        }
+        .tool_wrap #mute .triangle,.tool_wrap #list .triangle {
+                position: absolute;
+                z-index: 15;
+                width: 15px;
+                height: 15px;
+                top: -14px;
+                right: 6px;
+                background: #fff;
+                border: 1px solid #ccc;
+                border-left-color: transparent;
+                border-top-color: transparent;
+                transform: rotateZ(45deg)
+        }
+        .tool_wrap #mute:hover .volume, .tool_wrap #mute:hover .triangle {
+                display: block;
+                opacity: 1;
+        }
+        .tool_wrap #list:hover .music_menu, .tool_wrap #list:hover .triangle {
+                display: block;
+                opacity: 1;
+        }
+        .tool_wrap #mute .volume .volume_mute {
+                font-size: 16px
+        }
+        .tool_wrap #mute .volume .volume_progress {
+                display: inline-block;
+                vertical-align: middle;
+                position: relative;
+        }
+        .tool_wrap #mute .volume .volume_progress .volume_base_progress {
+                position: absolute;
+                top: 0;
+                height: 3px;
+                width: 160px;
+                border-radius: 3px;
+                background: #ccc
+        }
+        .tool_wrap #mute .volume .volume_progress .volume_active_progress {
+                position: absolute;
+                top: 0;
+                height: 3px;
+                width: 60px;
+                border-radius: 3px;
+                background: #f00
+        }
+        .tool_wrap #mute .volume .volume_progress .volume_dot {
+                position: absolute;
+                top: -2px;
+                left: 58px;
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+                background: #fff;
+                border: 2px solid #f00;
+        }
+        @keyframes roll {
+                20% {transform: translateX(0);}
+                100% { transform: translateX(-50%); }
+        }
+        @keyframes bling {
+                0% {
+                        box-shadow: 0 0 5px 0 #f00
                 }
-                .icon {
-                        display: inline-block;
-                        box-sizing: border-box;
-                        font-size: 35px;
-                        color: #f00;
-                        vertical-align: top;
-                        height: 50px;
-                        padding: 10px;
-                        line-height: 30px;
-                        background: #eee
-                }
-                .content_wrap {
-                        display: inline-block;
-                        font-size: 16px;
-                        height: 100%;
-                        margin-left: 10px
-                }
-                .title_wrap {
-                        display: inline-block;
-                        font-size: 14px;
-                        height: 16px;
-                        line-height: 16px;
-                        margin-left: 5px;
-                        vertical-align: middle;
-                        overflow: hidden;
-                        white-space: nowrap
-                }
-                .content {
-                        color: #666;
-                        display:inline-block;
-                        border-radius: 6px;
-                        letter-spacing: 2px;
-                        overflow: hidden;
-                        animation: roll 5s linear infinite 1s;
-                }
-                .singer {
-                        color: #ccc;
-                        font-size: 12px
-                }
-                .controls {
-                        display: inline-block;
-                        vertical-align: top;
-                        height: 50px;
-                        line-height: 50px;
-                        font-size: 0;
-                }
-                .controls .pre, .controls .next, .controls .start {
-                        display: inline-block;
-                        margin: 10px;
-                        background: rgb(223, 59, 59);
-                        color: #fff;
-                        border-radius: 50%;
-                        text-align: center;
-                        line-height: 30px;
-                        width: 30px;
-                        height: 30px;
-                        font-size: 18px 
-                }
-                .controls .pre:active, .controls .next:active, .controls .start:active {
-                        font-size: 16px;
-                        background: rgb(240, 15, 15)
-                }
-                .progress_warp {
-                        height: 26px;
-                        width: 400px;
-                        box-sizing: border-box;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding: 0 5px;
-                }
-                .progress_warp .progress {
-                        position: relative;
-                        width: 300px;
-                        height: 3px;
-                        background: #ccc;
-                        border-radius: 5px;
-                }
-                .content_wrap .progress .active_progress {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        border-radius: 5px;
-                        height: 3px;
-                        width: 0px;
-                        background: #f00
-                }
-                .progress_warp .progress .dot {
-                        position: absolute;
-                        top: -2px;
-                        left: -2px;
-                        width: 6px;
-                        height: 6px;
-                        border-radius: 3px;
-                        background: rgb(255, 1, 1);
-                        animation: bling 1s linear infinite;
-                }
-                .progress_warp .time{
-                        font-size: 12px;
-                        color: #666
-                }
-                @keyframes roll {
-                        20% {transform: translateX(0);}
-                        100% { transform: translateX(-50%); }
-                }
-                @keyframes bling {
-                        0% {
-                                box-shadow: 0 0 5px 0 #f00
-                        }
-                        100% {
-                                box-shadow: 0 0 15px 0 #f00
-                        } 
-                }
+                100% {
+                        box-shadow: 0 0 15px 0 #f00
+                } 
+        }
         </style>
 </head>
 <body>
@@ -162,6 +290,35 @@
                                 </div>
                         </div>
                 </div> 
+                <div class="tool_wrap">
+                        <i id="loop" class="tool_item iconfont icon-xunhuan"></i>
+                        <i id="mute" class="tool_item iconfont icon-yinliang">
+                                <div class="volume">
+                                        <i class="volume_mute iconfont icon-yinliang"></i>
+                                        <div class="volume_progress">
+                                                <div class="volume_base_progress"></div>
+                                                <div id="activeVolume" class="volume_active_progress"></div>
+                                                <div id="volumeDot" class="volume_dot"></div>
+                                        </div>
+                                </div>
+                                <div class="triangle"></div>
+                        </i>
+                        <i id="list" class="tool_item iconfont icon-yinleliebiao">
+                                <div class="music_menu">
+                                        <p>播放列表</p>
+                                        <ul>
+                                                <li>九张机</li>
+                                                <li>拆东墙</li>
+                                                <li>雅俗共赏</li>
+                                                <li>素颜</li>
+                                                <li>富士山下</li>
+                                                <li>最冷一天</li>
+                                                <li>走马</li>
+                                        </ul>
+                                </div>
+                                <div class="triangle"></div>
+                        </i>
+                </div>
         </div>
         <audio id="music"></audio>
 </body>
@@ -200,21 +357,25 @@
         let state = {
                 play : false,
                 cur: 0,
-                timer: null
+                timer: null,
+                loop: -1
         }
         window.onload = () => {
-                let titleWrap = document.querySelector('.title_wrap')
-                let content = document.querySelector('#content')
-                let music = document.querySelector('#music')
-                let singer = document.querySelector('#singer')
+                let titleWrap = $('.title_wrap')
+                let content = $('#content')
+                let music = $('#music')
+                let singer = $('#singer')
 
-               let start = document.querySelector('#start')
-               let pre = document.querySelector('#pre')
-               let next = document.querySelector('#next')
-               let currentTime = document.querySelector('#current_time')
-               let totalTime = document.querySelector('#total_time')
-               let progress = document.querySelector('#progress')
-               let dot = document.querySelector('#dot')
+                let lis = Array.from(document.querySelectorAll('li'))
+               let start = $('#start'),
+                pre = $('#pre'),
+                next = $('#next'),
+                currentTime = $('#current_time'),
+                totalTime = $('#total_time'),
+                progress = $('#progress'), 
+                dot = $('#dot'), 
+                loop = $('#loop'),
+                mute = $('#mute')
                 
                 music.setAttribute('src', musics[state.cur].src)
                 content.innerText = musics[state.cur].name + musics[state.cur].name
@@ -234,7 +395,6 @@
                                 music.pause()
                         }
                 })
-                
                 //上一首下一首
                 pre.addEventListener('click', () => {changeSong(-1)})
                 next.addEventListener('click',() => {changeSong(1)})
@@ -264,9 +424,24 @@
                         let pro = 300 * music.currentTime / music.duration
                         progress.style.width = pro + 'px'
                         dot.style.left = (pro - 2) + 'px'
-                        if(music.currentTime == music.duration) {
-                                state.cur++
-                                changeSong(1)
+                        switch(state.loop) {
+                                case 0: 
+                                        music.loop = false
+                                        if(music.currentTime == music.duration) {
+                                                state.cur++
+                                                changeSong(1)
+                                        }
+                                        break;
+                                case 1: 
+                                        music.loop = true
+                                        break;
+                                case 2: 
+                                        music.loop = false
+                                        if(music.currentTime == music.duration) {
+                                                let cur =Math.floor(Math.random()*7)
+                                                changeSong(cur)
+                                        }
+                                        break;
                         }
                 }, 500)
                 
@@ -277,6 +452,45 @@
                         let second = Math.floor(time % 60)
                         second = second > 9 ? '' + second : '0' + second
                         return minute + ':' + second
+                }
+                // 点击切换循环模式
+                loop.addEventListener('click', ()=> {
+                        checkModel()
+                })
+                // 切换循环模式
+                function checkModel() {
+                        state.loop++
+                        state.loop = state.loop % 3
+                        switch (state.loop) {
+                                case 0:
+                                        loop.className = "tool_item iconfont icon-xunhuan"
+                                        break
+                                case 1:
+                                        loop.className = "tool_item iconfont icon-danquxunhuan"
+                                        break
+                                case 2:
+                                        loop.className = "tool_item iconfont icon-bofangqi_shouyesuijibofang"
+                                        break
+                        }
+                }
+                checkModel()
+                
+                lis.forEach((item, index) => {
+                        item.onclick = function() {
+                                music.setAttribute('src', musics[index].src)
+                                content.innerText = musics[index].name + musics[index].name
+                                singer.innerText = musics[index].singer
+                                let titleWidth = content.offsetWidth
+                                titleWrap.style.width = (titleWidth / 2) + 'px'
+                                state.play = true
+                                start.className = "start iconfont icon-zanting"
+                                music.play() 
+                        }
+                })
+                
+                // 选择器
+                function $(id) {
+                        return document.querySelector(id)
                 }
         }
         
