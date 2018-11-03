@@ -1,272 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <link rel="stylesheet" href="./style/iconfont.css">
-        <title>Document</title>
-        <style> 
-        *{
-                margin: 0;
-                padding: 0;
+<link rel="stylesheet" href="./style/iconfont.css">
+<title>Document</title>
+<style> 
+*{
+        margin: 0;
+        padding: 0;
+}
+ul ,li {
+        list-style: none;
+}
+.wrap{
+        font-size: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+        height: 50px;
+        width: 785px;
+        border: 1px solid #f2f2f2;
+        border-radius: 5px;
+}
+.icon {
+        display: inline-block;
+        box-sizing: border-box;
+        font-size: 35px;
+        color: #f00;
+        vertical-align: top;
+        height: 50px;
+        padding: 10px;
+        line-height: 30px;
+        background: #eee
+}
+.content_wrap {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 16px;
+        height: 100%;
+        margin-left: 10px
+}
+.title_wrap {
+        display: inline-block;
+        font-size: 14px;
+        height: 16px;
+        line-height: 16px;
+        margin-left: 5px;
+        vertical-align: middle;
+        overflow: hidden;
+        white-space: nowrap
+}
+.content {
+        color: #666;
+        display:inline-block;
+        border-radius: 6px;
+        letter-spacing: 2px;
+        overflow: hidden;
+        animation: roll 5s linear infinite 1s;
+}
+.singer {
+        color: #ccc;
+        font-size: 12px
+}
+.controls {
+        display: inline-block;
+        vertical-align: top;
+        height: 50px;
+        line-height: 50px;
+        font-size: 0;
+}
+.controls .pre, .controls .next, .controls .start {
+        display: inline-block;
+        margin: 10px;
+        background: rgb(223, 59, 59);
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        width: 30px;
+        height: 30px;
+        font-size: 18px 
+}
+.controls .pre:active, .controls .next:active, .controls .start:active {
+        font-size: 16px;
+        background: rgb(240, 15, 15)
+}
+.progress_warp {
+        height: 26px;
+        width: 400px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5px;
+}
+.progress_warp .progress {
+        cursor: pointer;
+        position: relative;
+        width: 300px;
+        height: 3px;
+        background: #ccc;
+        border-radius: 5px;
+}
+.content_wrap .progress .active_progress {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 5px;
+        height: 3px;
+        width: 0px;
+        background: #f00
+}
+.progress_warp .progress .dot {
+        position: absolute;
+        cursor: pointer;
+        top: -2px;
+        left: -2px;
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        background: rgb(255, 1, 1);
+        animation: bling 1s linear infinite;
+}
+.progress_warp .time{
+        font-size: 12px;
+        color: #666
+}
+.tool_wrap {
+        display: inline-block;
+        vertical-align: top;
+        height: 50px;
+        line-height: 50px;
+}
+.tool_wrap .tool_item {
+        cursor: pointer;
+        width: 25px;
+        margin:0 15px;
+        font-size: 22px;
+        color: #666
+}
+.tool_wrap #mute, .tool_wrap #list {
+        position: relative;
+        display: inline-block;
+        height: 45px;
+}
+.tool_wrap #mute .volume, .tool_wrap #mute .triangle, .tool_wrap #list .triangle, .tool_wrap #list .music_menu  {
+        display: none;
+        opacity: 0;
+        transition: opacity 2s linear
+}
+.tool_wrap #mute .volume,.tool_wrap #list .music_menu {
+        position: absolute;
+        z-index: 10;
+        box-sizing: border-box;
+        padding: 0 5px;
+        width: 200px;
+        height: 45px;
+        line-height: 35px;
+        border: 1px solid #ccc;
+        background: #fff;
+        top: -50px;
+        right: -80px;
+}
+.tool_wrap #list .music_menu {
+        width: 400px;
+        height: 300px;
+        top: -305px;
+        padding: 0;
+        font-size: 16px
+}
+.tool_wrap #list .music_menu p {
+        border-bottom: 1px solid #ddd
+}
+.tool_wrap #list .music_menu ul {
+        overflow-y: scroll;
+        overflow-x: none;
+        height: 250px;
+}
+.tool_wrap #list .music_menu ul li {
+        font-size: 14px;
+        padding: 0 10px;
+        border-top: 1px solid #ccc
+}
+.tool_wrap #list .music_menu ul li:hover {
+        background: #eee
+}
+ul::-webkit-scrollbar {
+        width: 4px;
+}
+ul::-webkit-scrollbar-thumb {
+        background: #818181;
+        border-radius: 6px;
+}
+.tool_wrap #mute .triangle,.tool_wrap #list .triangle {
+        position: absolute;
+        z-index: 15;
+        width: 15px;
+        height: 15px;
+        top: -14px;
+        right: 6px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        transform: rotateZ(45deg)
+}
+.tool_wrap #mute:hover .volume, .tool_wrap #mute:hover .triangle {
+        display: block;
+        opacity: 1;
+}
+.tool_wrap #list:hover .music_menu, .tool_wrap #list:hover .triangle {
+        display: block;
+        opacity: 1;
+}
+.tool_wrap #mute .volume .volume_mute {
+        font-size: 16px;
+        vertical-align: middle
+}
+.tool_wrap #mute .volume .volume_progress {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+}
+.tool_wrap #mute .volume .volume_progress .volume_base_progress {
+        position: absolute;
+        top: 0;
+        height: 3px;
+        width: 160px;
+        border-radius: 3px;
+        background: #ccc
+}
+.tool_wrap #mute .volume .volume_progress .volume_active_progress {
+        position: absolute;
+        top: 0;
+        height: 3px;
+        width: 80px;
+        border-radius: 3px;
+        background: #f00
+}
+.tool_wrap #mute .volume .volume_progress .volume_dot {
+        position: absolute;
+        top: -2px;
+        left: 78px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #f00;
+}
+@keyframes roll {
+        20% {transform: translateX(0);}
+        100% { transform: translateX(-50%); }
+}
+@keyframes bling {
+        0% {
+                box-shadow: 0 0 5px 0 #f00
         }
-        ul ,li {
-                list-style: none;
-        }
-        .wrap{
-                font-size: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                box-sizing: border-box;
-                height: 50px;
-                width: 785px;
-                border: 1px solid #f2f2f2;
-                border-radius: 5px;
-        }
-        .icon {
-                display: inline-block;
-                box-sizing: border-box;
-                font-size: 35px;
-                color: #f00;
-                vertical-align: top;
-                height: 50px;
-                padding: 10px;
-                line-height: 30px;
-                background: #eee
-        }
-        .content_wrap {
-                display: inline-block;
-                vertical-align: top;
-                font-size: 16px;
-                height: 100%;
-                margin-left: 10px
-        }
-        .title_wrap {
-                display: inline-block;
-                font-size: 14px;
-                height: 16px;
-                line-height: 16px;
-                margin-left: 5px;
-                vertical-align: middle;
-                overflow: hidden;
-                white-space: nowrap
-        }
-        .content {
-                color: #666;
-                display:inline-block;
-                border-radius: 6px;
-                letter-spacing: 2px;
-                overflow: hidden;
-                animation: roll 5s linear infinite 1s;
-        }
-        .singer {
-                color: #ccc;
-                font-size: 12px
-        }
-        .controls {
-                display: inline-block;
-                vertical-align: top;
-                height: 50px;
-                line-height: 50px;
-                font-size: 0;
-        }
-        .controls .pre, .controls .next, .controls .start {
-                display: inline-block;
-                margin: 10px;
-                background: rgb(223, 59, 59);
-                color: #fff;
-                border-radius: 50%;
-                text-align: center;
-                line-height: 30px;
-                width: 30px;
-                height: 30px;
-                font-size: 18px 
-        }
-        .controls .pre:active, .controls .next:active, .controls .start:active {
-                font-size: 16px;
-                background: rgb(240, 15, 15)
-        }
-        .progress_warp {
-                height: 26px;
-                width: 400px;
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0 5px;
-        }
-        .progress_warp .progress {
-                cursor: pointer;
-                position: relative;
-                width: 300px;
-                height: 3px;
-                background: #ccc;
-                border-radius: 5px;
-        }
-        .content_wrap .progress .active_progress {
-                cursor: pointer;
-                position: absolute;
-                top: 0;
-                left: 0;
-                border-radius: 5px;
-                height: 3px;
-                width: 0px;
-                background: #f00
-        }
-        .progress_warp .progress .dot {
-                position: absolute;
-                cursor: pointer;
-                top: -2px;
-                left: -2px;
-                width: 6px;
-                height: 6px;
-                border-radius: 3px;
-                background: rgb(255, 1, 1);
-                animation: bling 1s linear infinite;
-        }
-        .progress_warp .time{
-                font-size: 12px;
-                color: #666
-        }
-        .tool_wrap {
-                display: inline-block;
-                vertical-align: top;
-                height: 50px;
-                line-height: 50px;
-        }
-        .tool_wrap .tool_item {
-                cursor: pointer;
-                width: 25px;
-                margin:0 15px;
-                font-size: 22px;
-                color: #666
-        }
-        .tool_wrap #mute, .tool_wrap #list {
-                position: relative;
-                display: inline-block;
-                height: 45px;
-        }
-        .tool_wrap #mute .volume, .tool_wrap #mute .triangle, .tool_wrap #list .triangle, .tool_wrap #list .music_menu  {
-                display: none;
-                opacity: 0;
-                transition: opacity 2s linear
-        }
-        .tool_wrap #mute .volume,.tool_wrap #list .music_menu {
-                position: absolute;
-                z-index: 10;
-                box-sizing: border-box;
-                padding: 0 5px;
-                width: 200px;
-                height: 45px;
-                line-height: 35px;
-                border: 1px solid #ccc;
-                background: #fff;
-                top: -50px;
-                right: -80px;
-        }
-        .tool_wrap #list .music_menu {
-                width: 400px;
-                height: 300px;
-                top: -305px;
-                padding: 0;
-                font-size: 16px
-        }
-        .tool_wrap #list .music_menu p {
-                border-bottom: 1px solid #ddd
-        }
-        .tool_wrap #list .music_menu ul {
-                overflow-y: scroll;
-                overflow-x: none;
-                height: 250px;
-        }
-        .tool_wrap #list .music_menu ul li {
-                font-size: 14px;
-                padding: 0 10px;
-                border-top: 1px solid #ccc
-        }
-        .tool_wrap #list .music_menu ul li:hover {
-                background: #eee
-        }
-        ul::-webkit-scrollbar {
-                width: 4px;
-        }
-        ul::-webkit-scrollbar-thumb {
-                background: #818181;
-                border-radius: 6px;
-        }
-        .tool_wrap #mute .triangle,.tool_wrap #list .triangle {
-                position: absolute;
-                z-index: 15;
-                width: 15px;
-                height: 15px;
-                top: -14px;
-                right: 6px;
-                background: #fff;
-                border: 1px solid #ccc;
-                border-left-color: transparent;
-                border-top-color: transparent;
-                transform: rotateZ(45deg)
-        }
-        .tool_wrap #mute:hover .volume, .tool_wrap #mute:hover .triangle {
-                display: block;
-                opacity: 1;
-        }
-        .tool_wrap #list:hover .music_menu, .tool_wrap #list:hover .triangle {
-                display: block;
-                opacity: 1;
-        }
-        .tool_wrap #mute .volume .volume_mute {
-                font-size: 16px;
-                vertical-align: middle
-        }
-        .tool_wrap #mute .volume .volume_progress {
-                display: inline-block;
-                vertical-align: middle;
-                position: relative;
-        }
-        .tool_wrap #mute .volume .volume_progress .volume_base_progress {
-                position: absolute;
-                top: 0;
-                height: 3px;
-                width: 160px;
-                border-radius: 3px;
-                background: #ccc
-        }
-        .tool_wrap #mute .volume .volume_progress .volume_active_progress {
-                position: absolute;
-                top: 0;
-                height: 3px;
-                width: 80px;
-                border-radius: 3px;
-                background: #f00
-        }
-        .tool_wrap #mute .volume .volume_progress .volume_dot {
-                position: absolute;
-                top: -2px;
-                left: 78px;
-                width: 3px;
-                height: 3px;
-                border-radius: 50%;
-                background: #fff;
-                border: 2px solid #f00;
-        }
-        @keyframes roll {
-                20% {transform: translateX(0);}
-                100% { transform: translateX(-50%); }
-        }
-        @keyframes bling {
-                0% {
-                        box-shadow: 0 0 5px 0 #f00
-                }
-                100% {
-                        box-shadow: 0 0 15px 0 #f00
-                } 
-        }
-        </style>
+        100% {
+                box-shadow: 0 0 15px 0 #f00
+        } 
+}
+</style>
 </head>
 <body>
         <div class="wrap">
@@ -457,11 +457,14 @@
                 })
                 // 点击调节音量
                 Vprogress.addEventListener('click', function(e){
+                        e.stopPropagation()
                         setVolume(e)
                 })
                 activeVolume.addEventListener('click', function(e){
+                        e.stopPropagation()
                         setVolume(e)
                 })
+                // 点击静音
                 enMute.addEventListener('click', function() {
                         if(music.muted) {
                                 enMute.classList.add('icon-yinliang')
@@ -481,6 +484,7 @@
                                 music.muted = true
                         }
                 })
+                // 设置音量
                 function setVolume(e) {
                         let volume = e.offsetX / e.target.offsetWidth
                         music.muted = false
