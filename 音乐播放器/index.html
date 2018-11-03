@@ -23,7 +23,7 @@
                 transform: translate(-50%, -50%);
                 box-sizing: border-box;
                 height: 50px;
-                width: 775px;
+                width: 785px;
                 border: 1px solid #f2f2f2;
                 border-radius: 5px;
         }
@@ -140,6 +140,7 @@
         }
         .tool_wrap .tool_item {
                 cursor: pointer;
+                width: 25px;
                 margin:0 15px;
                 font-size: 22px;
                 color: #666
@@ -161,7 +162,7 @@
                 padding: 0 5px;
                 width: 200px;
                 height: 45px;
-                line-height: 45px;
+                line-height: 35px;
                 border: 1px solid #ccc;
                 background: #fff;
                 top: -50px;
@@ -219,7 +220,8 @@
                 opacity: 1;
         }
         .tool_wrap #mute .volume .volume_mute {
-                font-size: 16px
+                font-size: 16px;
+                vertical-align: middle
         }
         .tool_wrap #mute .volume .volume_progress {
                 display: inline-block;
@@ -238,14 +240,14 @@
                 position: absolute;
                 top: 0;
                 height: 3px;
-                width: 60px;
+                width: 80px;
                 border-radius: 3px;
                 background: #f00
         }
         .tool_wrap #mute .volume .volume_progress .volume_dot {
                 position: absolute;
                 top: -2px;
-                left: 58px;
+                left: 78px;
                 width: 3px;
                 height: 3px;
                 border-radius: 50%;
@@ -297,9 +299,9 @@
                         <i id="loop" class="tool_item iconfont icon-xunhuan"></i>
                         <i id="mute" class="tool_item iconfont icon-yinliang">
                                 <div class="volume">
-                                        <i class="volume_mute iconfont icon-yinliang"></i>
+                                        <i id="en_mute" class="volume_mute iconfont icon-yinliang"></i>
                                         <div class="volume_progress">
-                                                <div class="volume_base_progress"></div>
+                                                <div id="v_progress" class="volume_base_progress"></div>
                                                 <div id="activeVolume" class="volume_active_progress"></div>
                                                 <div id="volumeDot" class="volume_dot"></div>
                                         </div>
@@ -379,14 +381,18 @@
                 dot = $('#dot'), 
                 loop = $('#loop'),
                 mute = $('#mute'),
-                baseProgress = $('#baseProgress')
+                enMute = $('#en_mute'),
+                baseProgress = $('#baseProgress'),
+                Vprogress = $('#v_progress'),
+                activeVolume = $('#activeVolume'),
+                volumeDot = $('#volumeDot')
 
                 music.setAttribute('src', musics[state.cur].src)
+                music.volume = 0.5
                 content.innerText = musics[state.cur].name + musics[state.cur].name
                 singer.innerText = musics[state.cur].singer
                 let titleWidth = content.offsetWidth
                 titleWrap.style.width = (titleWidth / 2) + 'px'
-                
                 // 暂停开始
                 start.addEventListener('click', function() {
                         if(!state.play) {
@@ -449,6 +455,45 @@
                        progress.style.width = pro + 'px'
                         dot.style.left = (pro - 2) + 'px'
                 })
+                // 点击调节音量
+                Vprogress.addEventListener('click', function(e){
+                        setVolume(e)
+                })
+                activeVolume.addEventListener('click', function(e){
+                        setVolume(e)
+                })
+                enMute.addEventListener('click', function() {
+                        if(music.muted) {
+                                enMute.classList.add('icon-yinliang')
+                                enMute.classList.remove('icon-jingyin-copy-copy')
+                                mute.classList.add('icon-yinliang')
+                                mute.classList.remove('icon-jingyin-copy-copy')
+                                activeVolume.style.background = '#f00'
+                                volumeDot.style.borderColor = '#f00'
+                                music.muted = false
+                        } else {
+                                enMute.classList.remove('icon-yinliang')
+                                enMute.classList.add('icon-jingyin-copy-copy')
+                                mute.classList.remove('icon-yinliang')
+                                mute.classList.add('icon-jingyin-copy-copy')
+                                activeVolume.style.background = '#ddd'
+                                volumeDot.style.borderColor = '#ddd'
+                                music.muted = true
+                        }
+                })
+                function setVolume(e) {
+                        let volume = e.offsetX / e.target.offsetWidth
+                        music.muted = false
+                        music.volume = volume
+                        enMute.classList.add('icon-yinliang')
+                        enMute.classList.remove('icon-jingyin-copy-copy')
+                        mute.classList.add('icon-yinliang')
+                        mute.classList.remove('icon-jingyin-copy-copy')
+                        activeVolume.style.background = '#f00'
+                        volumeDot.style.borderColor = '#f00'
+                        activeVolume.style.width = e.offsetX + 'px' ,
+                        volumeDot.style.left = (e.offsetX - 2) + 'px'
+                }
                 // 时间格式化
                 function formatTime(time) {
                         let minute =Math.floor(time / 60)
