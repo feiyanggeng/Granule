@@ -13,7 +13,6 @@
         transform-style: preserve-3d;
         transform: rotateX(-20deg) rotateY(-20deg);
         animation: rotate linear 3s infinite;
-        transform-origin: 50% 50%
 }
 .dice .warpper{
         position: absolute;
