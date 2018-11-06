@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+<style>
+        *{margin: 0; padding:0}
+        .clock{position: absolute;top: 50%;left: 50%;width: 200px;height: 200px;margin-top: -100px;margin-left: -100px;border-radius: 50%;border: 1px solid #000}
+        .clock img {width: 200px;height: 200px}
+        .clock .seconds {position: absolute;top: 50%;left: 50%;width: 90px;height: 2px;background: rgb(24, 9, 163);margin-top: -1px;transform-origin: left}
+        .clock .minute {position: absolute;top: 50%;left: 50%;width: 60px;height: 4px;background: rgb(14, 230, 61);margin-top: -2px;transform-origin: left}
+        .clock .hour {position: absolute;top: 50%;left: 50%;width: 50px;height: 6px;background: #000;margin-top: -3px;transform-origin: left}
+        .clock .point {position: absolute;top: 50%;left: 50%;width: 6px;height: 6px;background: rgb(252, 31, 2);margin-top: -3px;margin-left: -3px;border-radius: 50%}
+</style>
+<body>
+        <div class="clock">
+                <img src="./images/clock.jpg" alt="">
+                <div class="point"></div>
+                <div id="hour" class="hour"></div>
+                <div id="minute" class="minute"></div>
+                <div id="seconds" class='seconds'></div>
+        </div>
+</body>
+<script>
+        let _minute = document.getElementById('minute')
+        let _secondes = document.getElementById('seconds')
+        let _hour = document.getElementById('hour')
+        let d = new Date()
+        let _m = d.getMinutes()
+        let _s = d.getSeconds()
+        let _h = d.getHours()
+        let hour_deg = _h*30 + 270
+        let minute_deg = _m*6 + 270
+        let seconds_deg = _s*6 + 270
+        _hour.style.transform = `rotate(${hour_deg}deg)`
+        _minute.style.transform = `rotate(${minute_deg}deg)`
+        _secondes.style.transform = `rotate(${seconds_deg}deg)`
+        setInterval(()=>{
+                hour_deg += 0.1/12
+                minute_deg += 0.1
+                seconds_deg += 6
+                _hour.style.transform = `rotate(${hour_deg}deg)`
+                _minute.style.transform = `rotate(${minute_deg}deg)`
+                _secondes.style.transform = `rotate(${seconds_deg}deg)`
+        },1000)
+
+
+</script>
+</html>
