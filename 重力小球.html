@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>重力小球</title>
+</head>
+<style>
+        * {
+                padding: 0;
+                margin: 0;
+        }
+        body {
+                overflow: hidden;
+        }
+</style>
+<body>
+        <canvas id="canvas"></canvas>
+</body>
+<script>        
+        const canvas = document.getElementById('canvas')
+        let canvas_width = canvas.width = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth
+        let canvas_height = canvas.height = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight
+        canvas.style.backgroundColor = '#f1f1f1'
+        let ctx = canvas.getContext('2d')
+        let startX = 20, startY = 20
+        let vx = 5, vy = 0
+        let g = .98, f = 0.1 // g 为模拟重力加速度， f为模拟阻力 
+        function draw() {
+                if (vy >= 0) {
+                        f = -0.2
+                }
+                vy += g + f
+
+                ctx.clearRect(0, 0, canvas_width, canvas_height)
+                ctx.beginPath()
+                // 先画个小球
+                let color = ctx.createRadialGradient(startX-2, startY-2, 2, startX, startY, 10)
+                color.addColorStop(0, '#fff')
+                color.addColorStop(1, '#000')
+                ctx.fillStyle = color
+                ctx.arc(startX, startY, 10, 0, Math.PI*2)
+                ctx.fill()
+                startX += vx
+                startY += vy
+
+                if(startY >= canvas_height-20) {
+                        vy = -vy
+                        f = 0.2
+                } 
+                if (startX >= canvas_width - 20 || startX <= 20) {
+                        vx = -vx
+                }
+        
+                window.requestAnimationFrame(draw)
+        }
+
+        draw()
+
+</script>
+</html>
