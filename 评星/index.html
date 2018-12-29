@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>评星</title>
+</head>
+<style>
+        img {
+                cursor: pointer;
+        }
+</style>
+<body>
+        <div id='star_wrap'>
+                <img src="./img/星空.png" data-index='0' data-check='0' alt="">
+                <img src="./img/星空.png" data-index='1' data-check='0' alt="">
+                <img src="./img/星空.png" data-index='2' data-check='0' alt="">
+                <img src="./img/星空.png" data-index='3' data-check='0' alt="">
+                <img src="./img/星空.png" data-index='4' data-check='0' alt="">
+        </div>
+</body>
+<script>
+        let imgs = document.getElementsByTagName('img')
+        let starWrap = document.getElementById('star_wrap')
+
+        starWrap.addEventListener('click', function(e){
+                let index = e.target.dataset.index
+                let check = imgs[index].dataset.check
+                for (let i = 0; i < imgs.length; i++) {
+                        if (i < index) {
+                                imgs[i].src = './img/星.png'
+                                imgs[i].setAttribute('data-check', 1)
+                        } else if (i > index) {
+                                imgs[i].src = './img/星空.png'
+                                imgs[i].setAttribute('data-check', 0)
+                        }
+                }
+                if (check == 1) {
+                        imgs[index].src = './img/星空.png'
+                        imgs[index].setAttribute('data-check', 0)
+                } else {
+                        imgs[index].src = './img/星.png'
+                        imgs[index].setAttribute('data-check', 1)
+                }
+        })
+
+</script>
+</html>
