@@ -216,7 +216,7 @@ function add2SKUResult(combArrItem, sku) {
 function initSKU() {
     var i, j, skuKeys = getObjKeys(data);
     for(i = 0; i < skuKeys.length; i++) {
-        var skuKey = skuKeys[i];//一条SKU信息key
+        var skuKey = skuKeys[i]; //一条SKU信息key
         var sku = data[skuKey];	//一条SKU信息value
         var skuKeyAttrs = skuKey.split(";"); //SKU信息key属性值数组
         var len = skuKeyAttrs.length;

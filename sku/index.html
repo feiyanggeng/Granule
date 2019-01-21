@@ -8,6 +8,38 @@
         <Link href="./index.css"></Link>
         <style>
                 .bh-sku-selected {color: red;}
+                .yin-yang {
+                        width: 96px;
+                        height: 48px;
+                        border-color: #f00;
+                        border-style: solid;
+                        border-width:2px 2px 48px 2px;
+                        border-radius: 100%;
+                        background: #eee;
+                        position: relative
+                }
+                .yin-yang::after {
+                        content: '';
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 100%;
+                        border: 19px solid #eee;
+                        background: #f00;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%
+                }
+                .yin-yang::before {
+                        content: '';
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 100%;
+                        border: 19px solid #f00;
+                        background: #eee;
+                        position: absolute;
+                        left: 0;
+                        top: 50%
+                }
         </style>
 </head>
 <body>
@@ -45,6 +77,7 @@
                 
                 <span id="init_time">init sku time: </span> </br>
                 <span id="price">--</span> </br>
+                <div class="yin-yang"></div>
 </body>
 <script src="./jquery.min.js"></script>
 <script src="./index.js"></script>
