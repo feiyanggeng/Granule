@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+<style> 
+.yin-yang {
+        width: 96px;
+        height: 48px;
+        border-color: #f00;
+        border-style: solid;
+        border-width:2px 2px 48px 2px;
+        border-radius: 100%;
+        background: #eee;
+        position: relative
+}
+.yin-yang::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        border: 19px solid #eee;
+        background: #f00;
+        position: absolute;
+        left: 50%;
+        top: 50%
+}
+.yin-yang::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        border: 19px solid #f00;
+        background: #eee;
+        position: absolute;
+        left: 0;
+        top: 50%
+}
+
+.heart {
+        margin-top: 45px;
+        width: 0;
+        height: 0;
+        border-width: 50px 50px 0 50px;
+        border-style: solid;
+        border-color: #f00 transparent transparent transparent;
+        position: relative
+        
+}
+.heart::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 35px;
+        border-radius: 50px 50px 0 0;
+        background: #f00;
+        position: absolute;
+        top: -85px;
+        left: -10px
+}
+.heart::before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 35px;
+        border-radius: 50px 50px 0 0;
+        background: #f00;
+        position: absolute;
+        top: -85px;
+        left: -50px
+}
+</style>
+<body>
+<div class="yin-yang"></div>
+<div class="heart"></div>
+</body>
+</html>
